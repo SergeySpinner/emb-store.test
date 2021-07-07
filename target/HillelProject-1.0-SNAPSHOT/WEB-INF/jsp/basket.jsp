@@ -5,17 +5,27 @@
         <title>Basket page</title>
     </head>
     <body>
+    <b>Basket of </b>
+    <br>
         <table>
-            <c:forEach items="${basket}" var="item">
+            <c:forEach items="${map}" var="item">
                 <tr>
-                    <td><c:out value="${item.id}"/></td>
-                    <td><c:out value="${item.name}"/></td>
-                    <td><c:out value="${item.price}"/></td>
-                    <td><c:out value="${item.prodInfo}"/></td>
-                    <td><a href="deleteBasketItem?productId=${product.id}"> Buy this product</a> </td>
+                    <td><c:out value="${item.getValue().id}"/></td>
+                    <td><c:out value="${item.getValue().name}"/></td>
+                    <td><c:out value="${item.getValue().price}"/></td>
+                    <td><c:out value="${item.getValue().prodInfo}"/></td>
+                    <td><a href="deleteBasketItem?productId=${item.getKey()}"> Delete this product</a> </td>
                 </tr>
             </c:forEach>
         </table>
+        <br>
+<%--        <table>--%>
+<%--            <c:forEach items="${ids}" var="id">--%>
+<%--                <tr>--%>
+<%--                    <td><a href="deleteBasketItem?productId=${id}"> Delete this product</a> </td>--%>
+<%--                </tr>--%>
+<%--            </c:forEach>--%>
+<%--        </table>--%>
         <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/profile';">Go to profile</button>
     </body>
 </html>

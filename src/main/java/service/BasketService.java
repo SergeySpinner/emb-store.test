@@ -46,4 +46,12 @@ public class BasketService {
             throw new ServiceException();
         }
     }
+    public void deleteProductPosition(Integer productId) throws ServiceException {
+        try{
+            basketDao.deletePositionOfBasket(productId);
+        } catch (DaoException e) {
+            throw new ServiceException();
+        }
+    }
+
 }

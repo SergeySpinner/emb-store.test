@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Basket {
     private BasketState basketState;
-    private List<Integer> productIdList = new ArrayList<>();
+    private List<Integer> idList = new ArrayList<>();
     private List<Product> basketList = new ArrayList<>();
     private Integer priceOfBasket;
     private Integer buyerId;
@@ -29,7 +29,7 @@ public class Basket {
         this.basketList.add(product);
     }
 
-    public void addToIdList(Integer productId){ this.productIdList.add(productId);}
+    public void addToIdList(Integer productId){ this.idList.add(productId);}
 
     public BasketState getBasketState() {
         return basketState;
@@ -71,8 +71,8 @@ public class Basket {
         return buyerId;
     }
 
-    public List<Integer> getProductIdList() {
-        return productIdList;
+    public List<Integer> getIdList() {
+        return idList;
     }
 
     public void setBuyerId(Integer buyerId) {
