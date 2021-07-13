@@ -1,6 +1,6 @@
 package dao;
 
-import javafx.geometry.Pos;
+import org.springframework.stereotype.Repository;
 import utils.PostgresUtils;
 import entity.User;
 
@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDao {
     private static final String USER_FIELD_FULL = "id, username, role, mailcontact, login, password";
     private static final String USER_FIELD = "username, role, mailcontact, login, password";

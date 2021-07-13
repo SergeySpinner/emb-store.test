@@ -2,6 +2,7 @@ package dao;
 
 import entity.Basket;
 import entity.Product;
+import org.springframework.stereotype.Repository;
 import utils.PostgresUtils;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//@Repository
 public class BasketDao {
     private static final String BASKET_FIELD = "userid, productid, basketstate";
     private static final String BASKET_FIELD_FULL = "id ,userid, productid, basketstate";

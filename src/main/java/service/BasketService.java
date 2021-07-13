@@ -3,9 +3,13 @@ package service;
 import dao.BasketDao;
 import dao.DaoException;
 import entity.Basket;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BasketService {
-    private BasketDao basketDao = new BasketDao();
+    @Autowired
+    private BasketDao basketDao;
 
     public void insertService(Basket basket) throws ServiceException {
         try {

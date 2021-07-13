@@ -1,5 +1,6 @@
 package dao;
 
+import org.springframework.stereotype.Repository;
 import utils.PostgresUtils;
 import entity.Product;
 
@@ -7,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ProductDao {
     private static final String PRODUCT_FIELD_FULL = "id, prodname, price, prodquantity, prodinfo";
     private static final String PRODUCT_FIELD = "prodname ,price, prodquantity, prodinfo";
