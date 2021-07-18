@@ -31,11 +31,6 @@ public class BasketDaoImpl implements BasketDao {
 
     private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 
-    @Bean
-    public BasketDaoImpl getBasketDaoImpl(){
-        return new BasketDaoImpl();
-    }
-
     @Override
     public void insertBasket(Basket basket) throws DaoException {
         try (Connection connection = dataSource.getConnection();

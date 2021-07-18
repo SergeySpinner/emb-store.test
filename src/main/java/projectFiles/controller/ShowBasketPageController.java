@@ -15,12 +15,7 @@ import java.util.Iterator;
 @Component
 public class ShowBasketPageController implements Controller {
 
-    private BasketService basketService;
-
-    @Autowired
-    public void setBasketService(BasketService basketService) {
-        this.basketService = basketService;
-    }
+    private BasketService basketService = new BasketService();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

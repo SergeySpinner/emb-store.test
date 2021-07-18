@@ -1,11 +1,13 @@
 package projectFiles.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import projectFiles.dao.DaoException;
 import projectFiles.dao.ProductDao;
 import projectFiles.utils.PostgresUtils;
 import projectFiles.entity.Product;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,17 @@ public class ProductDaoImpl implements ProductDao {
     private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
 
+    private DataSource dataSource;
+
+    @Autowired
+    public void setProductDaoImpl(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
+
     @Override
     public Integer create(Product product) throws DaoException {
         try (
-                Connection connection = PostgresUtils.getConnection();
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)
         ) {
             preparedStatement.setString(1, product.getName());
@@ -40,7 +49,7 @@ public class ProductDaoImpl implements ProductDao {
 
             return generatedKey;
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
@@ -48,12 +57,12 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void delete(Product product) throws DaoException {
         try (
-                Connection connection = PostgresUtils.getConnection();
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)
         ) {
             preparedStatement.setInt(1, product.getId());
             preparedStatement.execute();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
@@ -62,7 +71,7 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> findAll() throws DaoException {
         List<Product> products = new ArrayList<>();
         try (
-                Connection connection = PostgresUtils.getConnection();
+                Connection connection = dataSource.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL)
         ) {
@@ -76,7 +85,7 @@ public class ProductDaoImpl implements ProductDao {
                 ));
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new DaoException();
         }
         return products;
@@ -85,7 +94,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(Integer id) throws DaoException {
         try (
-                Connection connection = PostgresUtils.getConnection();
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
         ) {
             preparedStatement.setInt(1, id);
@@ -98,7 +107,7 @@ public class ProductDaoImpl implements ProductDao {
                         resultSet.getString("prodinfo")
                 );
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new DaoException();
         }
         return null;

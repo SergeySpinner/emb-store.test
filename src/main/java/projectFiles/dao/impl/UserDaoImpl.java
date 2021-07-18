@@ -1,11 +1,13 @@
 package projectFiles.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import projectFiles.dao.DaoException;
 import projectFiles.dao.UserDao;
 import projectFiles.utils.PostgresUtils;
 import projectFiles.entity.User;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +23,17 @@ public class UserDaoImpl implements UserDao {
     private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"User\" where id = ?";
 
+    private DataSource dataSource;
+
+    @Autowired
+    public void setUserDaoImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     public Integer create(User user) throws DaoException {
-        try(Connection connection = PostgresUtils.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL,Statement.RETURN_GENERATED_KEYS)){
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             Integer generatedKey = 0;
             preparedStatement.setString(1, user.getUserName());
@@ -36,40 +45,39 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.execute();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
             }
             return generatedKey;
-        }
-        catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
 
     @Override
-    public void delete(User user) throws DaoException{
-        try(
-                Connection connection = PostgresUtils.getConnection();
+    public void delete(User user) throws DaoException {
+        try (
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)
-        ){
+        ) {
             preparedStatement.setInt(1, user.getId());
 
             preparedStatement.execute();
 
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
 
     @Override
-    public List<User> findAll() throws DaoException{
-        List <User> users = new ArrayList<>();
-        try(
-                Connection connection = PostgresUtils.getConnection();
+    public List<User> findAll() throws DaoException {
+        List<User> users = new ArrayList<>();
+        try (
+                Connection connection = dataSource.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL)
-        ){
-            while(resultSet.next()){
+        ) {
+            while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("id"),
                         resultSet.getString("username"),
@@ -81,21 +89,20 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
             return users;
-        }
-        catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
 
     @Override
-    public User getById(Integer id) throws DaoException{
-        try(
-                Connection connection = PostgresUtils.getConnection();
+    public User getById(Integer id) throws DaoException {
+        try (
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
         ) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return new User(
                         resultSet.getInt("id"),
                         resultSet.getString("username"),
@@ -106,20 +113,20 @@ public class UserDaoImpl implements UserDao {
                 );
             }
             return null;
-        } catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
 
     @Override
-    public User getByLogin(String login) throws DaoException{
-        try(
-                Connection connection = PostgresUtils.getConnection();
+    public User getByLogin(String login) throws DaoException {
+        try (
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_USERNAME)
-                ){
+        ) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return new User(resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("role"),
@@ -128,20 +135,20 @@ public class UserDaoImpl implements UserDao {
                         resultSet.getString("password"));
             }
             return null;
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }
 
     @Override
-    public User getByEmail(String email) throws DaoException{
-        try(
-                Connection connection = PostgresUtils.getConnection();
+    public User getByEmail(String email) throws DaoException {
+        try (
+                Connection connection = dataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_EMAIL)
-        ){
+        ) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return new User(resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("role"),
@@ -150,7 +157,7 @@ public class UserDaoImpl implements UserDao {
                         resultSet.getString("password"));
             }
             return null;
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException e) {
             throw new DaoException();
         }
     }

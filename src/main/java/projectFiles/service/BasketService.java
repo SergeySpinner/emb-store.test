@@ -1,27 +1,11 @@
 package projectFiles.service;
 
-import org.springframework.context.annotation.Bean;
 import projectFiles.dao.impl.BasketDaoImpl;
 import projectFiles.dao.DaoException;
 import projectFiles.entity.Basket;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class BasketService {
-    BasketService basketService;
-    private BasketDaoImpl basketDaoImpl;
-
-    @Autowired
-    public void setBasketDaoImpl(BasketDaoImpl basketDaoImpl) {
-        this.basketDaoImpl = basketDaoImpl;
-        basketService = new BasketService();
-    }
-
-    @Bean
-    public BasketService getBasketService() {
-        return basketService;
-    }
+    private BasketDaoImpl basketDaoImpl = new BasketDaoImpl();
 
     public void insertService(Basket basket) throws ServiceException {
         try {
