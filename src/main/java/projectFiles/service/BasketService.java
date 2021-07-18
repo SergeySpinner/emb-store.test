@@ -1,6 +1,7 @@
 package projectFiles.service;
 
-import projectFiles.dao.BasketDao;
+import org.springframework.context.annotation.Bean;
+import projectFiles.dao.impl.BasketDaoImpl;
 import projectFiles.dao.DaoException;
 import projectFiles.entity.Basket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BasketService {
-    private BasketDao basketDao;
+    BasketService basketService;
+    private BasketDaoImpl basketDaoImpl;
 
     @Autowired
-    public void setBasketDao(){
-        this.basketDao = new BasketDao();
-        System.out.println("CRINNNNNNNNNNNNNNNNNNNNNGE");
+    public void setBasketDaoImpl(BasketDaoImpl basketDaoImpl) {
+        this.basketDaoImpl = basketDaoImpl;
+        basketService = new BasketService();
+    }
+
+    @Bean
+    public BasketService getBasketService() {
+        return basketService;
     }
 
     public void insertService(Basket basket) throws ServiceException {
         try {
-            basketDao.insertBasket(basket);
+            basketDaoImpl.insertBasket(basket);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -34,7 +41,7 @@ public class BasketService {
 
     public void clearService(Basket basket) throws ServiceException {
         try {
-            basketDao.clearBasket(basket);
+            basketDaoImpl.clearBasket(basket);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -42,7 +49,7 @@ public class BasketService {
 
     public void updateService(Basket basket) throws ServiceException {
         try {
-            basketDao.updateBasket(basket);
+            basketDaoImpl.updateBasket(basket);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -50,17 +57,17 @@ public class BasketService {
 
     public Basket getUsersBasket(Integer userId) throws ServiceException {
         try {
-            return basketDao.getUsersBasket(userId);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
-    public void deleteProductPosition(Integer productId) throws ServiceException {
-        try{
-            basketDao.deletePositionOfBasket(productId);
+            return basketDaoImpl.getUsersBasket(userId);
         } catch (DaoException e) {
             throw new ServiceException();
         }
     }
 
+    public void deleteProductPosition(Integer productId) throws ServiceException {
+        try {
+            basketDaoImpl.deletePositionOfBasket(productId);
+        } catch (DaoException e) {
+            throw new ServiceException();
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package projectFiles.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import projectFiles.entity.Basket;
 import projectFiles.entity.BasketState;
 import projectFiles.entity.Product;
@@ -11,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+//@Service
 public class AddBasketController implements Controller{
     private ProductService productService = new ProductService();
-    private BasketService basketService = new BasketService();
+//    @Autowired
+    private BasketService basketService;
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

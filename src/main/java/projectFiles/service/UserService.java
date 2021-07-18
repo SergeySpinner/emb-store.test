@@ -1,17 +1,17 @@
 package projectFiles.service;
 
 import projectFiles.dao.DaoException;
-import projectFiles.dao.UserDao;
+import projectFiles.dao.impl.UserDaoImpl;
 import projectFiles.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private UserDao userDao = new UserDao();
+    private UserDaoImpl userDaoImpl = new UserDaoImpl();
 
     public User getByLogin(String name) throws ServiceException {
         try {
-            return userDao.getByLogin(name);
+            return userDaoImpl.getByLogin(name);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -19,7 +19,7 @@ public class UserService {
 
     public Integer createUser(User user) throws ServiceException {
         try {
-            return userDao.create(user);
+            return userDaoImpl.create(user);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -27,7 +27,7 @@ public class UserService {
 
     public User getByEmail(String email) throws ServiceException {
         try {
-            return userDao.getByEmail(email);
+            return userDaoImpl.getByEmail(email);
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -35,7 +35,7 @@ public class UserService {
 
     public User getById(Integer id) throws ServiceException {
         try {
-            return userDao.getById(id);
+            return userDaoImpl.getById(id);
         } catch (DaoException e) {
             throw new ServiceException();
         }

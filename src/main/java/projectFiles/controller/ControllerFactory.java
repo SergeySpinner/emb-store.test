@@ -1,5 +1,8 @@
 package projectFiles.controller;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import projectFiles.service.BasketService;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +10,8 @@ import java.util.Map;
 public class ControllerFactory {
 
     private Map<String, Controller> controllerMap = new HashMap<>();
+
+    final private AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("projectFiles");
 
     private void init() {
         controllerMap.put("GET/profile", new ProfileController());
