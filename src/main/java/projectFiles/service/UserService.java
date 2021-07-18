@@ -1,6 +1,6 @@
 package projectFiles.service;
 
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.impl.UserDaoImpl;
 import projectFiles.entity.User;
 import org.springframework.stereotype.Service;

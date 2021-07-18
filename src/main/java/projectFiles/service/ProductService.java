@@ -1,7 +1,7 @@
 package projectFiles.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.impl.ProductDaoImpl;
 import projectFiles.entity.Product;
 import org.springframework.stereotype.Service;

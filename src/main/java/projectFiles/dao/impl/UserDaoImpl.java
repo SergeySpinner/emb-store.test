@@ -2,9 +2,8 @@ package projectFiles.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.UserDao;
-import projectFiles.utils.PostgresUtils;
 import projectFiles.entity.User;
 
 import javax.sql.DataSource;
@@ -26,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     private DataSource dataSource;
 
     @Autowired
-    public void setUserDaoImpl(DataSource dataSource) {
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

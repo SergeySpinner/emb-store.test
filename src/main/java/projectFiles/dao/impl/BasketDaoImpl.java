@@ -1,9 +1,8 @@
 package projectFiles.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import projectFiles.dao.BasketDao;
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Basket;
 import projectFiles.entity.Product;
 import org.springframework.stereotype.Repository;

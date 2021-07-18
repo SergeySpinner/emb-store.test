@@ -2,9 +2,8 @@ package projectFiles.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.ProductDao;
-import projectFiles.utils.PostgresUtils;
 import projectFiles.entity.Product;
 
 import javax.sql.DataSource;

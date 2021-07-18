@@ -1,5 +1,6 @@
 package projectFiles.dao;
 
+import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Product;
 
 import java.util.List;

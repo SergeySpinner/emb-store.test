@@ -1,7 +1,7 @@
 package projectFiles.service;
 
 import projectFiles.dao.impl.BasketDaoImpl;
-import projectFiles.dao.DaoException;
+import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Basket;
 
 public class BasketService {
