@@ -22,7 +22,6 @@ public class ShowBasketPageController implements Controller {
         try {
             Integer userId = (Integer) req.getSession().getAttribute("userId");
 
-
             Basket basket = basketService.getUsersBasket(userId);
 
             Iterator<Product> productIterator = basket.getBasketList().iterator();

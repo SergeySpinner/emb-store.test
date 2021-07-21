@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-//@Service
-public class AddBasketController implements Controller{
+public class AddBasketController implements Controller {
     private ProductService productService = new ProductService();
-//    @Autowired
-    private BasketService basketService;
+    private BasketService basketService = new BasketService();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
@@ -26,7 +24,7 @@ public class AddBasketController implements Controller{
             Product product = productService.findById(Integer.parseInt(productId));
             Integer buyerId = (Integer) req.getSession().getAttribute("userId");
 
-            Basket basket = new Basket(BasketState.ON_AGREEMENT.toString() , product, buyerId);
+            Basket basket = new Basket(BasketState.ON_AGREEMENT.toString(), product, buyerId);
 
             basketService.insertService(basket);
 
@@ -34,9 +32,8 @@ public class AddBasketController implements Controller{
 
             req.setAttribute("products", products);
 
-
             return new ControllerResultDto("shop-page");
-        } catch (ServiceException e){
+        } catch (ServiceException e) {
             return new ControllerResultDto("error-500");
         }
     }
