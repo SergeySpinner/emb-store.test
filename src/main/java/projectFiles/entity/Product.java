@@ -1,6 +1,6 @@
 package projectFiles.entity;
 
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
     private String name;
     private Integer price;
     private Integer prodQuantity;
@@ -30,23 +30,23 @@ public class Product extends BaseEntity{
         this.prodInfo = prodInfo;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-    public String toString(){
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String toString() {
         return "{Product:id=" + getId() +
                 ",prodName=" + getName() +
                 ",price=" + getPrice() +

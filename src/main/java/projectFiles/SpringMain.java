@@ -18,7 +18,6 @@ public class SpringMain {
             for (Product product : basket.getBasketList()) {
                 System.out.println(product.toString());
             }
-
         } catch (ServiceException e) {
             e.printStackTrace();
         }

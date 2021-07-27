@@ -30,6 +30,10 @@ public class ConnectionPool {
     private int max;
     private int current;
 
+    public ConnectionPool(){
+        this.init();
+    }
+
     public void init() {
         try {
             for (int i = 0; i < 4; i++) {
