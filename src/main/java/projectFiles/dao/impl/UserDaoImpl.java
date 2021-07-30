@@ -2,6 +2,7 @@ package projectFiles.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import projectFiles.ConnectionPool;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.UserDao;
 import projectFiles.entity.User;
@@ -22,16 +23,17 @@ public class UserDaoImpl implements UserDao {
     private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"User\" where id = ?";
 
-    private DataSource dataSource;
-
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private ConnectionPool connectionPool = new ConnectionPool();
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public void setDataSource(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
 
     @Override
     public Integer create(User user) throws DaoException {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = connectionPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             Integer generatedKey = 0;
@@ -56,7 +58,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void delete(User user) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)
         ) {
             preparedStatement.setInt(1, user.getId());
@@ -72,7 +74,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() throws DaoException {
         List<User> users = new ArrayList<>();
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL)
         ) {
@@ -96,7 +98,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getById(Integer id) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
         ) {
             preparedStatement.setInt(1, id);
@@ -120,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getByLogin(String login) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_USERNAME)
         ) {
             preparedStatement.setString(1, login);
@@ -142,7 +144,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getByEmail(String email) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_EMAIL)
         ) {
             preparedStatement.setString(1, email);

@@ -2,6 +2,7 @@ package projectFiles.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import projectFiles.ConnectionPool;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.ProductDao;
 import projectFiles.entity.Product;
@@ -20,17 +21,18 @@ public class ProductDaoImpl implements ProductDao {
     private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
 
-    private DataSource dataSource;
-
-    @Autowired
-    public void setProductDaoImpl(DataSource dataSource){
-        this.dataSource = dataSource;
-    }
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public void setProductDaoImpl(DataSource dataSource){
+//        this.dataSource = dataSource;
+//    }
+    private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
     public Integer create(Product product) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)
         ) {
             preparedStatement.setString(1, product.getName());
@@ -56,7 +58,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void delete(Product product) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)
         ) {
             preparedStatement.setInt(1, product.getId());
@@ -70,7 +72,7 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> findAll() throws DaoException {
         List<Product> products = new ArrayList<>();
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL)
         ) {
@@ -93,7 +95,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(Integer id) throws DaoException {
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
         ) {
             preparedStatement.setInt(1, id);

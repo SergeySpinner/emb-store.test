@@ -7,15 +7,15 @@ import projectFiles.entity.Product;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+//@Service
 public class ProductService {
 
-    private ProductDaoImpl productDaoImpl;
+    private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 
-    @Autowired
-    public void setProductDaoImpl(ProductDaoImpl productDaoImpl){
-        this.productDaoImpl = productDaoImpl;
-    }
+//    @Autowired
+//    public void setProductDaoImpl(ProductDaoImpl productDaoImpl){
+//        this.productDaoImpl = productDaoImpl;
+//    }
 
     public List<Product> findAll() throws ServiceException {
         try{

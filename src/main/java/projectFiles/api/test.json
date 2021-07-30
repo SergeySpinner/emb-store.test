@@ -1,0 +1,46 @@
+{
+  "coord": {
+    "lon": 34.6574,
+    "lat": 47.4987
+  },
+  "weather": [
+    {
+      "id": 803,
+      "main": "Clouds",
+      "description": "brokenclouds",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 295.68,
+    "feels_like": 295.97,
+    "temp_min": 295.35,
+    "temp_max": 295.68,
+    "pressure": 1011,
+    "humidity": 76,
+    "sea_level": 1011,
+    "grnd_level": 1008
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.99,
+    "deg": 112,
+    "gust": 3.79
+  },
+  "clouds": {
+    "all": 58
+  },
+  "dt": 1627580617,
+  "sys": {
+    "type": 1,
+    "id": 8902,
+    "country": "UA",
+    "sunrise": 1627524917,
+    "sunset": 1627579211
+  },
+  "timezone": 10800,
+  "id": 709276,
+  "name": "Energodar",
+  "cod": 200
+}
