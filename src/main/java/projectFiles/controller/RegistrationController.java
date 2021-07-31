@@ -1,7 +1,7 @@
 package projectFiles.controller;
 
 import projectFiles.entity.User;
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 import projectFiles.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;

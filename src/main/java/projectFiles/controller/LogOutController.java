@@ -1,6 +1,6 @@
 package projectFiles.controller;
 
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

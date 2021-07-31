@@ -3,6 +3,7 @@ package projectFiles.dao;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Product;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface ProductDao {
@@ -13,4 +14,6 @@ public interface ProductDao {
     List<Product> findAll() throws DaoException;
 
     Product getById(Integer id) throws DaoException;
+
+    void updateCountById(Integer id, Connection connection) throws DaoException;
 }

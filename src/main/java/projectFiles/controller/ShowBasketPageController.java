@@ -1,11 +1,10 @@
 package projectFiles.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import projectFiles.entity.Basket;
 import projectFiles.entity.Product;
 import projectFiles.service.BasketService;
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

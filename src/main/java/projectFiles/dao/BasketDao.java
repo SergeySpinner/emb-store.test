@@ -3,6 +3,8 @@ package projectFiles.dao;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Basket;
 
+import java.sql.Connection;
+
 public interface BasketDao {
     void insertBasket(Basket basket) throws DaoException;
 
@@ -13,4 +15,6 @@ public interface BasketDao {
     void updateBasket(Basket basket) throws DaoException;
 
     Basket getUsersBasket(Integer userId) throws DaoException;
+
+    void buyPositionOfBasket(Integer basketId, Connection connection) throws DaoException;
 }

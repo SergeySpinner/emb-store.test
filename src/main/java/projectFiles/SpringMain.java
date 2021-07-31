@@ -4,7 +4,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import projectFiles.entity.Basket;
 import projectFiles.entity.Product;
 import projectFiles.service.BasketService;
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 
 import java.util.Arrays;
 

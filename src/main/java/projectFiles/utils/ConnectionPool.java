@@ -1,6 +1,6 @@
-package projectFiles;
+package projectFiles.utils;
 
-import projectFiles.utils.PostgresUtils;
+import org.postgresql.core.ConnectionFactory;
 
 import java.sql.Array;
 import java.sql.Blob;
@@ -30,7 +30,7 @@ public class ConnectionPool {
     private int max;
     private int current;
 
-    public ConnectionPool(){
+    ConnectionPool() {
         this.init();
     }
 
@@ -57,7 +57,6 @@ public class ConnectionPool {
                 e.printStackTrace();
             }
         }
-
         return queue.poll();
     }
 
@@ -67,7 +66,6 @@ public class ConnectionPool {
             queue.add(new ConnectionWrapper(connection));
         } catch (Exception e) {
         }
-
     }
 
     public class ConnectionWrapper implements Connection {
@@ -99,13 +97,13 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setAutoCommit(boolean autoCommit) throws SQLException {
-
+        public boolean getAutoCommit() throws SQLException {
+            return connection.getAutoCommit();
         }
 
         @Override
-        public boolean getAutoCommit() throws SQLException {
-            return connection.getAutoCommit();
+        public void setAutoCommit(boolean autoCommit) throws SQLException {
+
         }
 
         @Override
@@ -134,17 +132,12 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setReadOnly(boolean readOnly) throws SQLException {
-
-        }
-
-        @Override
         public boolean isReadOnly() throws SQLException {
             return false;
         }
 
         @Override
-        public void setCatalog(String catalog) throws SQLException {
+        public void setReadOnly(boolean readOnly) throws SQLException {
 
         }
 
@@ -154,13 +147,18 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setTransactionIsolation(int level) throws SQLException {
+        public void setCatalog(String catalog) throws SQLException {
 
         }
 
         @Override
         public int getTransactionIsolation() throws SQLException {
             return 0;
+        }
+
+        @Override
+        public void setTransactionIsolation(int level) throws SQLException {
+
         }
 
         @Override
@@ -199,13 +197,13 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setHoldability(int holdability) throws SQLException {
-
+        public int getHoldability() throws SQLException {
+            return 0;
         }
 
         @Override
-        public int getHoldability() throws SQLException {
-            return 0;
+        public void setHoldability(int holdability) throws SQLException {
+
         }
 
         @Override
@@ -289,11 +287,6 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setClientInfo(Properties properties) throws SQLClientInfoException {
-
-        }
-
-        @Override
         public String getClientInfo(String name) throws SQLException {
             return null;
         }
@@ -301,6 +294,11 @@ public class ConnectionPool {
         @Override
         public Properties getClientInfo() throws SQLException {
             return null;
+        }
+
+        @Override
+        public void setClientInfo(Properties properties) throws SQLClientInfoException {
+
         }
 
         @Override
@@ -314,13 +312,13 @@ public class ConnectionPool {
         }
 
         @Override
-        public void setSchema(String schema) throws SQLException {
-
+        public String getSchema() throws SQLException {
+            return null;
         }
 
         @Override
-        public String getSchema() throws SQLException {
-            return null;
+        public void setSchema(String schema) throws SQLException {
+
         }
 
         @Override

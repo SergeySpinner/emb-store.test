@@ -1,11 +1,9 @@
 package projectFiles.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import projectFiles.entity.Product;
 import projectFiles.service.BasketService;
 import projectFiles.service.ProductService;
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +11,7 @@ import java.util.List;
 
 //@Service
 public class DeleteBasketItemController implements Controller {
-//    @Autowired
+    //    @Autowired
     private BasketService basketService = new BasketService();
     private ProductService productService = new ProductService();
     private ShowBasketPageController sbpc = new ShowBasketPageController();

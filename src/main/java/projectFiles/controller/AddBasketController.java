@@ -1,13 +1,11 @@
 package projectFiles.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import projectFiles.entity.Basket;
 import projectFiles.entity.BasketState;
 import projectFiles.entity.Product;
 import projectFiles.service.BasketService;
 import projectFiles.service.ProductService;
-import projectFiles.service.ServiceException;
+import projectFiles.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +23,8 @@ public class AddBasketController implements Controller {
             Integer buyerId = (Integer) req.getSession().getAttribute("userId");
 
             Basket basket = new Basket(BasketState.ON_AGREEMENT.toString(), product, buyerId);
-
             basketService.insertService(basket);
-
             List<Product> products = productService.findAll();
-
             req.setAttribute("products", products);
 
             return new ControllerResultDto("shop-page");

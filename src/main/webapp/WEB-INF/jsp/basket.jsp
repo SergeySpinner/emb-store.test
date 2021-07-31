@@ -14,18 +14,12 @@
                     <td><c:out value="${item.getValue().name}"/></td>
                     <td><c:out value="${item.getValue().price}"/></td>
                     <td><c:out value="${item.getValue().prodInfo}"/></td>
+                    <td><a href="buyBasketItem?productId=${item.getKey()}"> Buy this product</a></td>
                     <td><a href="deleteBasketItem?productId=${item.getKey()}"> Delete this product</a> </td>
                 </tr>
             </c:forEach>
         </table>
         <br>
-<%--        <table>--%>
-<%--            <c:forEach items="${ids}" var="id">--%>
-<%--                <tr>--%>
-<%--                    <td><a href="deleteBasketItem?productId=${id}"> Delete this product</a> </td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--        </table>--%>
         <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/profile';">Go to profile</button>
     </body>
 </html>

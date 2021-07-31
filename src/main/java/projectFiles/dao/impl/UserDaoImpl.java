@@ -1,13 +1,12 @@
 package projectFiles.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import projectFiles.ConnectionPool;
+import projectFiles.utils.ConnectionPool;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.dao.UserDao;
 import projectFiles.entity.User;
+import projectFiles.utils.ConnectionSingleton;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +22,7 @@ public class UserDaoImpl implements UserDao {
     private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"User\" where id = ?";
 
-    private ConnectionPool connectionPool = new ConnectionPool();
-//    private DataSource dataSource;
-//
-//    @Autowired
-//    public void setDataSource(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
+    private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 
     @Override
     public Integer create(User user) throws DaoException {

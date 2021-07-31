@@ -1,13 +1,13 @@
 package projectFiles.dao.impl;
 
-import projectFiles.ConnectionPool;
+import projectFiles.utils.ConnectionPool;
 import projectFiles.dao.BasketDao;
 import projectFiles.dao.exception.DaoException;
 import projectFiles.entity.Basket;
 import projectFiles.entity.Product;
 import org.springframework.stereotype.Repository;
+import projectFiles.utils.ConnectionSingleton;
 
-import javax.sql.DataSource;
 import java.sql.*;
 
 @Repository
@@ -23,12 +23,12 @@ public class BasketDaoImpl implements BasketDao {
 
 //    private DataSource dataSource;
 
-//    @Autowired
+    //    @Autowired
 //    public void setBasketDaoImpl(DataSource dataSource){
 //        this.dataSource = dataSource;
 //    }
 //
-    private ConnectionPool connectionPool = new ConnectionPool();
+    private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 
     private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 
@@ -116,5 +116,16 @@ public class BasketDaoImpl implements BasketDao {
             throw new DaoException();
         }
         return basket;
+    }
+
+    @Override
+    public void buyPositionOfBasket(Integer productId, Connection connectionTemp) throws DaoException {
+        try (Connection connection = connectionTemp;
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
+            preparedStatement.setInt(1, productId);
+            preparedStatement.execute();
+        } catch (SQLException throwables) {
+            throw new DaoException();
+        }
     }
 }
