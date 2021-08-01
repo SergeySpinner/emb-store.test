@@ -15,14 +15,14 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
     private static final String PRODUCT_FIELD_FULL = "id, prodname, price, prodquantity, prodinfo";
     private static final String PRODUCT_FIELD = "prodname ,price, prodquantity, prodinfo";
-    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from \"Product\"";
+    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from \"Product\" order by id";
     private static final String SELECT_BY_ID = "select " + PRODUCT_FIELD_FULL + " from \"Product\" where id = ?";
 
     private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
     private static final String UPDATE_COUNT = "update \"Product\" set prodquantity = ? where id = ?";
 
-    private static final String SELECT_QUANTITY = "select \"Product\".prodquantity from \"Product\" " +
+    private static final String SELECT_QUANTITY = "select \"Product\".prodquantity, \"Product\".id from \"Product\" " +
             "inner join \"Basket\" on \"Basket\".productid = \"Product\".id " +
             "where \"Basket\".id = ?";
 //    private DataSource dataSource;
@@ -99,7 +99,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(Integer id) throws DaoException {
         try (
-                Connection connection = connectionPool.get(); //null
+                Connection connection = connectionPool.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
         ) {
             preparedStatement.setInt(1, id);
@@ -119,18 +119,24 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void updateCountById(Integer productId, Connection connectionTemp) throws DaoException {
+    public void updateCountById(Integer productInBasketId, Connection connectionTemp) throws DaoException {
         try(Connection connection = connectionTemp;
             PreparedStatement quantityStatement = connection.prepareStatement(SELECT_QUANTITY);
             PreparedStatement updateStatement = connection.prepareStatement(UPDATE_COUNT)
         ) {
-            quantityStatement.setInt(1, productId);
+            quantityStatement.setInt(1, productInBasketId);
             ResultSet resultSet = quantityStatement.executeQuery();
-            Integer quantityOfCurrentProduct = resultSet.getInt("prodquantity");
+            Integer quantityOfCurrentProduct = null;
+            Integer productId = null;
+            if(resultSet.next()) {
+                productId = resultSet.getInt("id");
+                quantityOfCurrentProduct = resultSet.getInt("prodquantity");
+                quantityOfCurrentProduct--;
+            }
             if(quantityOfCurrentProduct == 0)
                 throw new DaoException("Failed to buy product");
             else {
-                updateStatement.setInt(1, --quantityOfCurrentProduct);
+                updateStatement.setInt(1, quantityOfCurrentProduct);
                 updateStatement.setInt(2, productId);
                 updateStatement.execute();
             }
