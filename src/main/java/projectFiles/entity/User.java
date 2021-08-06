@@ -1,5 +1,7 @@
 package projectFiles.entity;
 
+import projectFiles.entity.spring.UserRole;
+
 public class User extends BaseEntity {
     private String userName;
     private UserRole role;

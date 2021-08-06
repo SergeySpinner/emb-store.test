@@ -1,4 +1,4 @@
-package projectFiles.entity;
+package projectFiles.entity.spring;
 
 public enum UserRole {
     ADMIN, MANUFACTURER, USER
