@@ -3,8 +3,8 @@ package projectFiles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import projectFiles.entity.spring.User;
-import projectFiles.repository.UserRepository;
+import projectFiles.entity.spring.Product;
+import projectFiles.repository.ProductRepository;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import java.util.List;
 public class ApplicationStarter {
     public static void main(String[] args) {
         try(ConfigurableApplicationContext ctx = SpringApplication.run(ApplicationStarter.class)) {
-            final UserRepository bean = ctx.getBean(UserRepository.class);
-            List<User> all = bean.testQuery2(17);
+            final ProductRepository bean = ctx.getBean(ProductRepository.class);
+            List<Product> all = bean.getAllByIdNot(0);
             all.forEach(e -> System.out.println(e.toString()));
         } catch (Exception e){
             e.printStackTrace();

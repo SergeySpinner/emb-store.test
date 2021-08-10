@@ -1,20 +1,18 @@
 package projectFiles.entity.spring;
 
-import projectFiles.entity.BasketState;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@ToString
 public class Basket {
     @Id
     private Long id;
-    @Column(name = "basketState")
-    private BasketState basketState;
-    private Integer priceOfBasket;
-    private Integer buyerId;
-//    @ManyToMany
-//    private List<Integer> idList = new ArrayList<>();
-    //    private List<Product> basketList = new ArrayList<>();
+    @Column(name = "basketstate")
+    private String basketState;
+    @Column(name = "userid")
+    private Integer userId;
+    @Column(name = "productid")
+    private Integer productId;
 }
