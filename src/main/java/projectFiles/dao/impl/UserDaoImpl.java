@@ -15,12 +15,12 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     private static final String USER_FIELD_FULL = "id, username, role, mailcontact, login, password";
     private static final String USER_FIELD = "username, role, mailcontact, login, password";
-    private static final String SELECT_ALL = "select " + USER_FIELD_FULL + " from \"User\"";
-    private static final String SELECT_BY_ID = "select " + USER_FIELD_FULL + " from \"User\" where id = ?";
-    private static final String SELECT_BY_USERNAME = "select " + USER_FIELD_FULL + " from \"User\" where login = ?";
-    private static final String SELECT_BY_EMAIL = "select " + USER_FIELD_FULL + " from \"User\" where mailcontact = ?";
-    private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
-    private static final String DELETE_SQL = "delete from \"User\" where id = ?";
+    private static final String SELECT_ALL = "select " + USER_FIELD_FULL + " from users";
+    private static final String SELECT_BY_ID = "select " + USER_FIELD_FULL + " from users where id = ?";
+    private static final String SELECT_BY_USERNAME = "select " + USER_FIELD_FULL + " from users where login = ?";
+    private static final String SELECT_BY_EMAIL = "select " + USER_FIELD_FULL + " from users where mailcontact = ?";
+    private static final String INSERT_SQL = "insert into users(" + USER_FIELD + ") values(?,?,?,?,?)";
+    private static final String DELETE_SQL = "delete from users where id = ?";
 
     private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 

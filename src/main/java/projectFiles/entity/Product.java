@@ -46,6 +46,7 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
+    @Override
     public String toString() {
         return "{Product:id=" + getId() +
                 ",prodName=" + getName() +

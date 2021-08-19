@@ -15,16 +15,16 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
     private static final String PRODUCT_FIELD_FULL = "id, prodname, price, prodquantity, prodinfo";
     private static final String PRODUCT_FIELD = "prodname ,price, prodquantity, prodinfo";
-    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from \"Product\" order by id";
-    private static final String SELECT_BY_ID = "select " + PRODUCT_FIELD_FULL + " from \"Product\" where id = ?";
+    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from products order by id";
+    private static final String SELECT_BY_ID = "select " + PRODUCT_FIELD_FULL + " from products where id = ?";
 
-    private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
-    private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
-    private static final String UPDATE_COUNT = "update \"Product\" set prodquantity = ? where id = ?";
+    private static final String INSERT_SQL = "insert into products(" + PRODUCT_FIELD + ") values(?,?,?,?)";
+    private static final String DELETE_SQL = "delete from products where id = ?";
+    private static final String UPDATE_COUNT = "update products set prodquantity = ? where id = ?";
 
-    private static final String SELECT_QUANTITY = "select \"Product\".prodquantity, \"Product\".id from \"Product\" " +
-            "inner join \"Basket\" on \"Basket\".productid = \"Product\".id " +
-            "where \"Basket\".id = ?";
+    private static final String SELECT_QUANTITY = "select products.prodquantity, products.id from products " +
+            "inner join basket on basket.productid = products.id " +
+            "where basket.id = ?";
 //    private DataSource dataSource;
 //
 //    @Autowired
