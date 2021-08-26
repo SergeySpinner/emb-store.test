@@ -33,4 +33,11 @@ public class ProductService {
             throw new ServiceException();
         }
     }
+
+    public int sumAll(List<Product> products){
+        Integer result = 0;
+        for(Product product : products)
+            result += product.getPrice();
+        return result;
+    }
 }
