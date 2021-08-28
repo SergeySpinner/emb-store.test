@@ -5,13 +5,15 @@ public class Product extends BaseEntity {
     private Integer price;
     private Integer prodQuantity;
     private String prodInfo;
+    private Integer creatorId;
 
-    public Product(Integer id, String name, Integer price, Integer prodQuantity, String prodInfo) {
+    public Product(Integer id, String name, Integer price, Integer prodQuantity, String prodInfo, Integer creatorId) {
         super(id);
         this.name = name;
         this.price = price;
         this.prodQuantity = prodQuantity;
         this.prodInfo = prodInfo;
+        this.creatorId = creatorId;
     }
 
     public Integer getProdQuantity() {
@@ -46,12 +48,22 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
     @Override
     public String toString() {
-        return "{Product:id=" + getId() +
-                ",prodName=" + getName() +
-                ",price=" + getPrice() +
-                ",prodQuantity=" + getProdQuantity() +
-                ",prodInfo=" + getProdInfo() + '}';
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", prodQuantity=" + prodQuantity +
+                ", prodInfo='" + prodInfo + '\'' +
+                ", creatorId=" + creatorId +
+                '}';
     }
 }

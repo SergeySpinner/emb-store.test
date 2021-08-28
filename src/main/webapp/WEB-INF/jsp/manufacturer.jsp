@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,6 +22,18 @@
             <p>Minimum: ${minimumTemp} Maximum: ${maximumTemp}</p>
             <p>Humidity: ${humidity}%</p>
         </td>
+        <td>
+            Your products
+            <c:forEach items="${products}" var="product">
+                <c:out value="${product.id}"/>
+                <c:out value="${product.name}"/>
+                <c:out value="${product.price}"/>
+                <c:out value="${product.prodQuantity}"/>
+                <c:out value="${product.prodInfo}"/>
+                <br>
+            </c:forEach>
+        </td>
+
     </table>
     </body>
 </html>

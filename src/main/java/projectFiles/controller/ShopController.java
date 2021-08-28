@@ -15,7 +15,7 @@ public class ShopController implements Controller {
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
 
-        Integer userId = (Integer) req.getSession().getAttribute("userId");
+        //Integer userId = (Integer) req.getSession().getAttribute("userId");
 
         List<Product> products = productService.findAll();
 

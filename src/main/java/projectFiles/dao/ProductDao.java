@@ -16,4 +16,5 @@ public interface ProductDao {
     Product getById(Integer id) throws DaoException;
 
     void updateCountById(Integer id, Connection connection) throws DaoException;
+
 }

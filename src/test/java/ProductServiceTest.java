@@ -28,8 +28,8 @@ public class ProductServiceTest {
     @Test
     public void ProductServiceSumAllTest() throws DaoException {
         List<Product> productList = Arrays.asList(
-                new Product(1, "T-shirt", 2241, 13, "Winter"),
-                new Product(2, "Shirt", 2200, 5, "Summer type")
+                new Product(1, "T-shirt", 2241, 13, "Winter", 15),
+                new Product(2, "Shirt", 2200, 5, "Summer type",15)
         );
 
         when(productDao.findAll()).thenReturn(productList);
@@ -39,8 +39,8 @@ public class ProductServiceTest {
 
     @Test
     public void getById() throws DaoException {
-        Product product1 = new Product(1, "T-shirt", 2241, 13, "Winter");
-        Product product2 = new Product(2, "Shirt", 2200, 5, "Summer type");
+        Product product1 = new Product(1, "T-shirt", 2241, 13, "Winter",15);
+        Product product2 = new Product(2, "Shirt", 2200, 5, "Summer type",15);
 
         when(productDao.getById(1)).thenReturn(product1);
         when(productDao.getById(2)).thenReturn(product2);
