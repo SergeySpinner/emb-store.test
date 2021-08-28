@@ -10,8 +10,8 @@ import java.io.IOException;
 
 public class LoginController implements Controller {
 
-    private UserService userService = new UserService();
-    private ProfileController profileController = new ProfileController();
+    private final UserService userService = new UserService();
+    private final ProfileController profileController = new ProfileController();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException, IOException {

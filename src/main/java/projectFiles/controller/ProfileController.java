@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ProfileController implements Controller {
 
-    UserService userService = new UserService();
+    final UserService userService = new UserService();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException, IOException {
@@ -23,7 +23,7 @@ public class ProfileController implements Controller {
         req.setAttribute("minimumTemp", weather.getTemperature().getTemp_min());
         req.setAttribute("maximumTemp", weather.getTemperature().getTemp_max());
         req.setAttribute("humidity", weather.getTemperature().getHumidity());
-        req.setAttribute("user", user);
+        req.getSession().setAttribute("user", user);
 
         return new ControllerResultDto("profile");
     }

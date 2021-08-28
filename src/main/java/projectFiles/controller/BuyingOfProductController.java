@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class BuyingOfProductController implements Controller {
 
     private final ShowBasketPageController sbpc = new ShowBasketPageController();
-    private BasketService basketService = new BasketService();
+    private final BasketService basketService = new BasketService();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

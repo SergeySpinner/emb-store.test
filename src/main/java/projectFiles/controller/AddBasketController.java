@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class AddBasketController implements Controller {
-    private ProductService productService = new ProductService();
-    private BasketService basketService = new BasketService();
+    private final ProductService productService = new ProductService();
+    private final BasketService basketService = new BasketService();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

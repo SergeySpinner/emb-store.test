@@ -9,15 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-//@Service
 public class DeleteBasketItemController implements Controller {
-    //    @Autowired
-    private BasketService basketService = new BasketService();
-    private ProductService productService = new ProductService();
-    private ShowBasketPageController sbpc = new ShowBasketPageController();
+    private final BasketService basketService = new BasketService();
+    private final ProductService productService = new ProductService();
+    private final ShowBasketPageController sbpc = new ShowBasketPageController();
 
     @Override
-    public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
+    public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
             Integer basketProductId = Integer.parseInt(req.getParameter("productId"));
             basketService.deleteProductPosition(basketProductId);
