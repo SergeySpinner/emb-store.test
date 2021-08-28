@@ -3,6 +3,7 @@ package projectFiles.controller;
 import projectFiles.api.WeatherData;
 import projectFiles.api.WeatherInfo;
 import projectFiles.entity.User;
+import projectFiles.entity.UserRole;
 import projectFiles.service.exception.ServiceException;
 import projectFiles.service.UserService;
 
@@ -24,7 +25,11 @@ public class ProfileController implements Controller {
         req.setAttribute("maximumTemp", weather.getTemperature().getTemp_max());
         req.setAttribute("humidity", weather.getTemperature().getHumidity());
         req.getSession().setAttribute("user", user);
-
-        return new ControllerResultDto("profile");
+        if(user.getRole() == UserRole.ADMIN)
+            return new ControllerResultDto("admin");
+        else if(user.getRole() == UserRole.MANUFACTURER)
+            return new ControllerResultDto("manufacturer");
+        else
+            return new ControllerResultDto("user");
     }
 }

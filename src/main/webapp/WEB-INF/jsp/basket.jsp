@@ -20,6 +20,6 @@
             </c:forEach>
         </table>
         <br>
-        <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/profile';">Go to profile</button>
+        <button onclick="window.location.href='/HillelProject/emb-store/profile';">Go to profile</button>
     </body>
 </html>

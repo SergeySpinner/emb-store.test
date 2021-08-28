@@ -7,6 +7,6 @@
     </head>
     <body>
         Access denied
-        <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/login';">Go to login page</button>
+        <button onclick="window.location.href='/HillelProject/emb-store/login';">Go to login page</button>
     </body>
 </html>
