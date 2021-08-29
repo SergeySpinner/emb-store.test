@@ -1,0 +1,26 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Admin shop</title>
+</head>
+    <body>
+        <p>Shop items</p>
+        <table>
+            <c:forEach items="${products}" var="product">
+                <tr>
+                    <td><c:out value="${product.id}"/></td>
+                    <td><c:out value="${product.name}"/></td>
+                    <td><c:out value="${product.price}"/></td>
+                    <td><c:out value="${product.prodQuantity}"/></td>
+                    <td><c:out value="${product.prodInfo}"/></td>
+                    <td><c:out value="${product.creatorId}"/></td>
+                    <td><a href="deleteProduct?productId=${product.id}"> Delete this product</a> </td>
+                </tr>
+                <br>
+            </c:forEach>
+        </table>
+        <br>
+    <button onclick="window.location.href='/HillelProject/emb-store/profile';">Go to profile</button>
+    </body>
+</html>

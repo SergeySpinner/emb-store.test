@@ -7,18 +7,12 @@ import projectFiles.service.exception.ServiceException;
 
 import java.util.List;
 
-//@Service
 public class ProductService {
 
     private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
 
-//    @Autowired
-//    public void setProductDaoImpl(ProductDaoImpl productDaoImpl){
-//        this.productDaoImpl = productDaoImpl;
-//    }
-
     public List<Product> findAll() throws ServiceException {
-        try{
+        try {
             List<Product> products = productDaoImpl.findAll();
             return products;
         } catch (DaoException e) {
@@ -26,17 +20,25 @@ public class ProductService {
         }
     }
 
-    public Product findById(Integer productId) throws ServiceException{
-        try{
+    public Product findById(Integer productId) throws ServiceException {
+        try {
             return productDaoImpl.getById(productId);
-        }catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException();
         }
     }
 
-    public int sumAll(List<Product> products){
+    public void delete(Product product) throws ServiceException {
+        try{
+            productDaoImpl.delete(product);
+        } catch (DaoException e){
+            throw new ServiceException();
+        }
+    }
+
+    public int sumAll(List<Product> products) {
         Integer result = 0;
-        for(Product product : products)
+        for (Product product : products)
             result += product.getPrice();
         return result;
     }
