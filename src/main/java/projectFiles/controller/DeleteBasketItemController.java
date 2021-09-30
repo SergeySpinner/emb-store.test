@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-//@Service
 public class DeleteBasketItemController implements Controller {
-    //    @Autowired
     private BasketService basketService = new BasketService();
     private ProductService productService = new ProductService();
     private ShowBasketPageController sbpc = new ShowBasketPageController();
