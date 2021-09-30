@@ -12,9 +12,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class BasketService {
-    private BasketDaoImpl basketDaoImpl = new BasketDaoImpl();
-    private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
-    private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
+    private final BasketDaoImpl basketDaoImpl = new BasketDaoImpl();
+    private final ProductDaoImpl productDaoImpl = new ProductDaoImpl();
+    private final ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 
     public void insertService(Basket basket) throws ServiceException {
         try {

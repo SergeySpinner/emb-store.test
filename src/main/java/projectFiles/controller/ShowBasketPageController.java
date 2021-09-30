@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Iterator;
 
-@Component
 public class ShowBasketPageController implements Controller {
 
     private BasketService basketService = new BasketService();

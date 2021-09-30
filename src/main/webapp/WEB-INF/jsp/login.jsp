@@ -15,7 +15,7 @@
             <button value="Sign in" type="Submit">Login</button>
         </form>
         <p>Don't have account yet?
-            <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/registration';">
+            <button onclick="window.location.href='/HillelProject/emb-store/registration';">
                 Create new account
             </button>
         </p>

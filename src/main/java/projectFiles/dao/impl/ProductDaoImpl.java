@@ -13,24 +13,19 @@ import java.util.List;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
-    private static final String PRODUCT_FIELD_FULL = "id, prodname, price, prodquantity, prodinfo";
-    private static final String PRODUCT_FIELD = "prodname ,price, prodquantity, prodinfo";
-    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from \"Product\" order by id";
-    private static final String SELECT_BY_ID = "select " + PRODUCT_FIELD_FULL + " from \"Product\" where id = ?";
+    private static final String PRODUCT_FIELD_FULL = "id, prodname, price, prodquantity, prodinfo, creatorid";
+    private static final String PRODUCT_FIELD = "prodname, price, prodquantity, prodinfo, creatorid";
+    private static final String SELECT_ALL = "select " + PRODUCT_FIELD_FULL + " from products order by id";
+    private static final String SELECT_BY_ID = "select " + PRODUCT_FIELD_FULL + " from products where id = ?";
 
-    private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
-    private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
-    private static final String UPDATE_COUNT = "update \"Product\" set prodquantity = ? where id = ?";
+    private static final String INSERT_SQL = "insert into products(" + PRODUCT_FIELD + ") values(?,?,?,?)";
+    private static final String DELETE_SQL = "delete from products where id = ?";
+    private static final String UPDATE_COUNT = "update products set prodquantity = ? where id = ?";
 
-    private static final String SELECT_QUANTITY = "select \"Product\".prodquantity, \"Product\".id from \"Product\" " +
-            "inner join \"Basket\" on \"Basket\".productid = \"Product\".id " +
-            "where \"Basket\".id = ?";
-//    private DataSource dataSource;
-//
-//    @Autowired
-//    public void setProductDaoImpl(DataSource dataSource){
-//        this.dataSource = dataSource;
-//    }
+    private static final String SELECT_QUANTITY = "select products.prodquantity, products.id from products " +
+            "inner join basket on basket.productid = products.id " +
+            "where basket.id = ?";
+
     private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 
     @Override
@@ -43,6 +38,7 @@ public class ProductDaoImpl implements ProductDao {
             preparedStatement.setInt(2, product.getPrice());
             preparedStatement.setInt(3, product.getProdQuantity());
             preparedStatement.setString(4, product.getProdInfo());
+            preparedStatement.setInt(5, product.getCreatorId());
 
             preparedStatement.execute();
             Integer generatedKey = 0;
@@ -86,7 +82,8 @@ public class ProductDaoImpl implements ProductDao {
                         resultSet.getString("prodname"),
                         resultSet.getInt("price"),
                         resultSet.getInt("prodquantity"),
-                        resultSet.getString("prodinfo")
+                        resultSet.getString("prodinfo"),
+                        resultSet.getInt("creatorid")
                 ));
             }
 
@@ -109,7 +106,8 @@ public class ProductDaoImpl implements ProductDao {
                         resultSet.getString("prodname"),
                         resultSet.getInt("price"),
                         resultSet.getInt("prodquantity"),
-                        resultSet.getString("prodinfo")
+                        resultSet.getString("prodinfo"),
+                        resultSet.getInt("creatorid")
                 );
             }
         } catch (SQLException e) {
@@ -144,6 +142,5 @@ public class ProductDaoImpl implements ProductDao {
             throw new DaoException("Failed to perform operation ProductDaoImpl.updateCountById");
         }
     }
-
 
 }

@@ -9,7 +9,7 @@ public class LogOutController implements Controller{
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         req.getSession().setAttribute("userId", null);
-
+        req.getSession().setAttribute("user", null);
         return new ControllerResultDto("logout");
     }
 }

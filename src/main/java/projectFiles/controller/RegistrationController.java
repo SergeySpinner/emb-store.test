@@ -35,7 +35,7 @@ public class RegistrationController implements Controller {
             user.setId(userService.createUser(user));
             req.setAttribute("user", user);
 
-            return new ControllerResultDto("profile");
+            return new ControllerResultDto("user");
         }
     }
 }

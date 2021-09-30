@@ -1,7 +1,5 @@
 package projectFiles.controller;
 
-import projectFiles.utils.ConnectionPool;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +15,7 @@ public class ControllerFactory {
         controllerMap.put("GET/client", new ShowPageController("login"));
         controllerMap.put("GET/logout", new LogOutController());
         controllerMap.put("GET/addToBasket", new AddBasketController());
+        controllerMap.put("GET/deleteProduct", new DeleteProductController());
         controllerMap.put("GET/basket", new ShowBasketPageController());
         controllerMap.put("GET/deleteBasketItem", new DeleteBasketItemController());
         controllerMap.put("GET/buyBasketItem", new BuyingOfProductController());

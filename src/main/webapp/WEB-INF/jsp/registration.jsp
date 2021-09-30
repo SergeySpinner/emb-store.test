@@ -29,7 +29,7 @@
 
             <button value="Sign up" type="submit">Create new user</button>
         </form>
-        <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/login';">
+        <button onclick="window.location.href='/HillelProject/emb-store/login';">
             Go back
         </button>
     </body>

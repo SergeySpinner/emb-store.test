@@ -14,12 +14,12 @@ import java.sql.*;
 public class BasketDaoImpl implements BasketDao {
     private static final String BASKET_FIELD = "userid, productid, basketstate";
     private static final String BASKET_FIELD_FULL = "id ,userid, productid, basketstate";
-    private static final String SELECT_BY_ID = "select basketstate, \"Product\".id as productId, \"Product\".prodname, \"Product\".price, \"Product\".prodquantity, \"Product\".prodinfo, \"Basket\".id as basketId" +
-            " from \"Basket\" inner join \"Product\" on \"Product\".id = \"Basket\".productid where \"Basket\".userid = ?";
-    private static final String INSERT_SQL = "insert into \"Basket\"(" + BASKET_FIELD + ") values(?,?,?)";
-    private static final String DELETE_SQL = "delete from \"Basket\" where id = ?";
-    private static final String CLEAR_BASKET_SQL = "delete form \"Basket\" where userid = ?";
-    private static final String UPDATE_SQL = "update \"Basket\" set basketstate = ? where userid = ?";
+    private static final String SELECT_BY_ID = "select basketstate, products.id as productId, products.creatorid as creatorid ,products.prodname, products.price, products.prodquantity, products.prodinfo, basket.id as basketId" +
+            " from basket inner join products on products.id = basket.productid where basket.userid = ?";
+    private static final String INSERT_SQL = "insert into basket(" + BASKET_FIELD + ") values(?,?,?)";
+    private static final String DELETE_SQL = "delete from basket where id = ?";
+    private static final String CLEAR_BASKET_SQL = "delete from basket where userid = ?";
+    private static final String UPDATE_SQL = "update basket set basketstate = ? where userid = ?";
 
 //    private DataSource dataSource;
 
@@ -106,7 +106,8 @@ public class BasketDaoImpl implements BasketDao {
                         resultSet.getString("prodname"),
                         resultSet.getInt("price"),
                         resultSet.getInt("prodquantity"),
-                        resultSet.getString("prodinfo")
+                        resultSet.getString("prodinfo"),
+                        resultSet.getInt("creatorid")
                 );
                 basket.addToIdList(resultSet.getInt("basketid"));
                 basket.addToBasketList(product);

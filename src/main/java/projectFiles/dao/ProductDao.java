@@ -45,4 +45,5 @@ public interface ProductDao {
      * @param connection connection with parameters
      */
     void updateCountById(Integer id, Connection connection) throws DaoException;
+
 }
