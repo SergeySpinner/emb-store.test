@@ -1,7 +1,7 @@
 package projectFiles.entity;
 
 
-public class BaseEntity {
+public abstract class BaseEntity {
     private Integer id;
 
     public BaseEntity(Integer id) {

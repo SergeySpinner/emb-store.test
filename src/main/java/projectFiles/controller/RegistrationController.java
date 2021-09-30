@@ -2,14 +2,14 @@ package projectFiles.controller;
 
 import projectFiles.entity.User;
 import projectFiles.service.exception.ServiceException;
-import projectFiles.service.UserService;
+import projectFiles.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationController implements Controller {
 
-    private UserService userService = new UserService();
+    private UserServiceImpl userServiceImpl = new UserServiceImpl();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
@@ -22,8 +22,8 @@ public class RegistrationController implements Controller {
 
         User user = new User(0, userName, role, mail, login, password);
 
-        User userTempLogin = userService.getByLogin(user.getLogin());
-        User userTempEmail = userService.getByEmail(user.getMailContact());
+        User userTempLogin = userServiceImpl.getByLogin(user.getLogin());
+        User userTempEmail = userServiceImpl.getByEmail(user.getMailContact());
 
         if (userTempLogin != null) {
             req.setAttribute("login", user.getLogin());
@@ -32,7 +32,7 @@ public class RegistrationController implements Controller {
             req.setAttribute("email", user.getMailContact());
             return new ControllerResultDto("email-error");
         } else {
-            user.setId(userService.createUser(user));
+            user.setId(userServiceImpl.createUser(user));
             req.setAttribute("user", user);
 
             return new ControllerResultDto("user");

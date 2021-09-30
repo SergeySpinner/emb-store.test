@@ -1,45 +1,38 @@
 package projectFiles.service;
 
-import projectFiles.dao.exception.DaoException;
-import projectFiles.dao.impl.UserDaoImpl;
 import projectFiles.entity.User;
-import org.springframework.stereotype.Service;
 import projectFiles.service.exception.ServiceException;
 
-@Service
-public class UserService {
-    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+public interface UserService {
+    /**
+     * Function that finds user by his login
+     *
+     * @param login user's login
+     * @return user according to login
+     */
+    User getByLogin(String login) throws ServiceException;
 
-    public User getByLogin(String name) throws ServiceException {
-        try {
-            return userDaoImpl.getByLogin(name);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
+    /**
+     * Function that adds new user in DataBase
+     *
+     * @param user prepared object of User class
+     * @return user's id
+     */
+    Integer createUser(User user) throws ServiceException;
 
-    public Integer createUser(User user) throws ServiceException {
-        try {
-            return userDaoImpl.create(user);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
+    /**
+     * Function that finds user by his mail address
+     *
+     * @param email user's mail address
+     * @return user according to mail address
+     */
+    User getByEmail(String email) throws ServiceException;
 
-    public User getByEmail(String email) throws ServiceException {
-        try {
-            return userDaoImpl.getByEmail(email);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
-
-    public User getById(Integer id) throws ServiceException {
-        try {
-            return userDaoImpl.getById(id);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
-
+    /**
+     * Function that finds user by his id
+     *
+     * @param id user's id
+     * @return user according to id
+     */
+    User getById(Integer id) throws ServiceException;
 }

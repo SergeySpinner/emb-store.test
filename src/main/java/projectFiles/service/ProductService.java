@@ -1,45 +1,30 @@
 package projectFiles.service;
 
-import projectFiles.dao.exception.DaoException;
-import projectFiles.dao.impl.ProductDaoImpl;
 import projectFiles.entity.Product;
 import projectFiles.service.exception.ServiceException;
 
 import java.util.List;
 
-public class ProductService {
+public interface ProductService {
+    /**
+     * Function that gets all existed products
+     *
+     * @return list of all products
+     */
+    List<Product> findAll() throws ServiceException;
 
-    private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
+    /**
+     * Function that receives product from DataBase by id
+     *
+     * @param productId product id
+     * @return product according to id
+     */
+    Product findById(Integer productId) throws ServiceException;
 
-    public List<Product> findAll() throws ServiceException {
-        try {
-            List<Product> products = productDaoImpl.findAll();
-            return products;
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
-
-    public Product findById(Integer productId) throws ServiceException {
-        try {
-            return productDaoImpl.getById(productId);
-        } catch (DaoException e) {
-            throw new ServiceException();
-        }
-    }
-
-    public void delete(Product product) throws ServiceException {
-        try{
-            productDaoImpl.delete(product);
-        } catch (DaoException e){
-            throw new ServiceException();
-        }
-    }
-
-    public int sumAll(List<Product> products) {
-        Integer result = 0;
-        for (Product product : products)
-            result += product.getPrice();
-        return result;
-    }
+    /**
+     * Function that deletes product from DataBase
+     *
+     * @param product prepared object of Product class
+     */
+    void delete(Product product) throws ServiceException;
 }

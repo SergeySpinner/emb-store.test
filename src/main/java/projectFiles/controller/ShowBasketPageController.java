@@ -1,9 +1,8 @@
 package projectFiles.controller;
 
-import org.springframework.stereotype.Component;
 import projectFiles.entity.Basket;
 import projectFiles.entity.Product;
-import projectFiles.service.BasketService;
+import projectFiles.service.impl.BasketServiceImpl;
 import projectFiles.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,14 +12,14 @@ import java.util.Iterator;
 
 public class ShowBasketPageController implements Controller {
 
-    private BasketService basketService = new BasketService();
+    private BasketServiceImpl basketServiceImpl = new BasketServiceImpl();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         try {
             Integer userId = (Integer) req.getSession().getAttribute("userId");
 
-            Basket basket = basketService.getUsersBasket(userId);
+            Basket basket = basketServiceImpl.getUsersBasket(userId);
 
             Iterator<Product> productIterator = basket.getBasketList().iterator();
             Iterator<Integer> idIterator = basket.getIdList().iterator();
