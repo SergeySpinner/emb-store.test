@@ -1,6 +1,7 @@
 package projectFiles.controller;
 
 import projectFiles.entity.User;
+import projectFiles.service.UserService;
 import projectFiles.service.exception.ServiceException;
 import projectFiles.service.impl.UserServiceImpl;
 
@@ -10,14 +11,14 @@ import java.io.IOException;
 
 public class LoginController implements Controller {
 
-    private final UserServiceImpl userServiceImpl = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl();
     private final ProfileController profileController = new ProfileController();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        User user = userServiceImpl.getByLogin(login);
+        User user = userService.getByLogin(login);
         if (user.getPassword().equals(password)) {
             req.setAttribute("user", user);
             req.getSession().setAttribute("userId", user.getId());

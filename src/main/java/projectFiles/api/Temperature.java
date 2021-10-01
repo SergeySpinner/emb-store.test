@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Temperature {
-    private double temp; //температура в данный момент
+    private double temp; // температура в данный момент
     private double temp_min; // минимальная
     private double temp_max; // максимальная температура
-    private double feels_like; //ощущается как
-    private int humidity; //влажность
+    private double feels_like; // ощущается как
+    private int humidity; // влажность
 
     public Temperature(@JsonProperty("temp") double temp, @JsonProperty("temp_min") double temp_min,
                        @JsonProperty("temp_max") double temp_max, @JsonProperty("feels_like") double feels_like,

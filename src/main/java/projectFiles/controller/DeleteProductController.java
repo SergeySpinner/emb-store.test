@@ -1,6 +1,7 @@
 package projectFiles.controller;
 
 import projectFiles.entity.Product;
+import projectFiles.service.ProductService;
 import projectFiles.service.impl.ProductServiceImpl;
 import projectFiles.service.exception.ServiceException;
 
@@ -11,16 +12,16 @@ import java.util.List;
 
 public class DeleteProductController implements Controller{
     private final ShopController shopController = new ShopController();
-    private final ProductServiceImpl productServiceImpl = new ProductServiceImpl();
+    private final ProductService productService = new ProductServiceImpl();
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException, IOException {
         try {
             String productId = req.getParameter("productId");
-            Product product = productServiceImpl.findById(Integer.parseInt(productId));
-            productServiceImpl.delete(product);
+            Product product = productService.findById(Integer.parseInt(productId));
+            productService.delete(product);
 
-            List<Product> products = productServiceImpl.findAll();
+            List<Product> products = productService.findAll();
             req.setAttribute("products", products);
 
             return shopController.execute(req, resp);

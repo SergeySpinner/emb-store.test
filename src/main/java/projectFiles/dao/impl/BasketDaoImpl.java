@@ -10,7 +10,6 @@ import projectFiles.utils.ConnectionSingleton;
 
 import java.sql.*;
 
-@Repository
 public class BasketDaoImpl implements BasketDao {
     private static final String BASKET_FIELD = "userid, productid, basketstate";
     private static final String BASKET_FIELD_FULL = "id ,userid, productid, basketstate";
@@ -21,13 +20,6 @@ public class BasketDaoImpl implements BasketDao {
     private static final String CLEAR_BASKET_SQL = "delete from basket where userid = ?";
     private static final String UPDATE_SQL = "update basket set basketstate = ? where userid = ?";
 
-//    private DataSource dataSource;
-
-    //    @Autowired
-//    public void setBasketDaoImpl(DataSource dataSource){
-//        this.dataSource = dataSource;
-//    }
-//
     private ConnectionPool connectionPool = ConnectionSingleton.getConnection();
 
     private ProductDaoImpl productDaoImpl = new ProductDaoImpl();
@@ -125,7 +117,7 @@ public class BasketDaoImpl implements BasketDao {
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
             preparedStatement.setInt(1, productId);
             preparedStatement.execute();
-        } catch (SQLException throwables) {
+        } catch (SQLException throwable) {
             throw new DaoException();
         }
     }
